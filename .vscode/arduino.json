@@ -1,5 +1,11 @@
 {
+<<<<<<< HEAD
     "board": "arduino:avr:uno",
     "port": "COM4",
     "sketch": "dht22.ino"
+=======
+    "board": "arduino:avr:mega",
+    "configuration": "cpu=atmega2560",
+    "sketch": "3sensors.ino"
+>>>>>>> a98a0418cfd50d946def64ecdbbb91868183e9d3
 }
