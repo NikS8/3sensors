@@ -1,5 +1,6 @@
 {
-    "board": "arduino:avr:mega",
-    "configuration": "cpu=atmega2560",
-    "sketch": "3sensors.ino"
+    "board": "arduino:avr:pro",
+    "sketch": "3sensors.ino",
+    "port": "COM4",
+    "configuration": "cpu=16MHzatmega328"
 }
