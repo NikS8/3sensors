@@ -77,25 +77,27 @@ void loop() {
 
   // Allocate JsonBuffer
   // Use arduinojson.org/assistant to compute the capacity.
-  StaticJsonBuffer<500> jsonBuffer;
+  StaticJsonBuffer <200> jsonBuffer;
 
   // Create the root object
   JsonObject& root = jsonBuffer.createObject();
 
   // Create the "analog" array
   JsonArray& analogValues = root.createNestedArray("analog");
- /* for (int pin = 0; pin < 6; pin++) {
+  /*for (int pin = 0; pin < 6; pin++) {
     // Read the analog input
     int value = analogRead(pin);
 
     // Add the value at the end of the array
     analogValues.add(value);
-*/
+  */
     analogValues.add(sensorMQa);
+ 
   }
+
   // Create the "digital" array
   JsonArray& digitalValues = root.createNestedArray("digital");
-/*  for (int pin = 0; pin < 14; pin++) {
+  /*for (int pin = 0; pin < 14; pin++) {
     // Read the digital input
     int value = digitalRead(pin);
 
@@ -106,8 +108,24 @@ void loop() {
     digitalValues.add(sensorSRd);
     digitalValues.add(sensorDhtHum);
     digitalValues.add(sensorDhtTemp);
-  
+   
   }
+
+  Serial.print(F("Sending: "));
+  root.printTo(Serial);
+  Serial.println();
+
+  // Write response headers
+  client.println("HTTP/1.0 200 OK");
+  client.println("Content-Type: application/json");
+  client.println("Connection: close");
+  client.println();
+
+  // Write JSON document
+  root.prettyPrintTo(client);
+
+  // Disconnect
+  client.stop();
 
 }
 
