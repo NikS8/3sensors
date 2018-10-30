@@ -17,7 +17,8 @@
 #include <Ethernet2.h>
 #include <SPI.h>
 byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-EthernetServer server(80);
+IPAddress ip(192,168,0,156);
+EthernetServer server(3003);
 
 #include <DHT.h>        // You have to download DHT22  library
 #define DHT1PIND 7       // PIN подключения датчика DTH22
@@ -39,10 +40,12 @@ int sensorSRd;  //  цифровой сигнал датчика движени�
 void setup() {
   Serial.begin(9600);
 // Initialize Ethernet libary
-  if (!Ethernet.begin(mac)) {
+Ethernet.begin(mac, ip);
+ /* if (!Ethernet.begin(mac)) {
     Serial.println(F("Failed to initialize Ethernet library"));
     return;
   }
+  */
 // Start to listen
   server.begin();
   Serial.println(F("Server is ready."));
@@ -77,7 +80,7 @@ void loop() {
 
   // Allocate JsonBuffer
   // Use arduinojson.org/assistant to compute the capacity.
-  StaticJsonBuffer <200> jsonBuffer;
+  StaticJsonBuffer <512> jsonBuffer;
 
   // Create the root object
   JsonObject& root = jsonBuffer.createObject();
@@ -90,10 +93,11 @@ void loop() {
 
     // Add the value at the end of the array
     analogValues.add(value);
-  */
-    analogValues.add(sensorMQa);
- 
   }
+  */
+   
+    root["sensorMQa"] = sensorMQa;
+   
 
   // Create the "digital" array
   JsonArray& digitalValues = root.createNestedArray("digital");
@@ -103,13 +107,12 @@ void loop() {
 
     // Add the value at the end of the array
     digitalValues.add(value);
-  */
-    digitalValues.add(sensorMQd);
-    digitalValues.add(sensorSRd);
-    digitalValues.add(sensorDhtHum);
-    digitalValues.add(sensorDhtTemp);
-   
-  }
+   }
+   */
+    root["sensorMQd"] = sensorMQd;   
+    root["sensorSRd"] = sensorSRd; 
+    root["sensorDhtHum %"] = sensorDhtHum;
+    root["sensorDhtTemp °C"] = sensorDhtTemp;
 
   Serial.print(F("Sending: "));
   root.printTo(Serial);
