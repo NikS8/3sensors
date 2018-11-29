@@ -18,13 +18,15 @@
         {
             "name": "Win32",
             "includePath": [
+                "c:\\Program Files (x86)\\Arduino\\tools\\**",
+                "c:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
                 "C:\\Users\\Nik\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\**",
                 "C:\\Users\\Nik\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.6.23\\**",
                 "c:\\Users\\Nik\\AppData\\Local\\Programs\\Arduino\\tools\\**",
                 "c:\\Users\\Nik\\AppData\\Local\\Programs\\Arduino\\hardware\\arduino\\avr\\**"
             ],
             "forcedInclude": [
-                "C:\\Users\\Nik\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.6.23\\cores\\arduino\\Arduino.h"
+                "c:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
             ]
         }
     ],
